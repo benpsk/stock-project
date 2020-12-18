@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Manage Stock</title>
+<title>Filter Page</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
@@ -39,20 +39,7 @@
 	</div>
 	<div class="container">
 
-		<div class="dropdown pt-4" style="float: right; margin-left: 20px;"
-			class="form-inline pt-4">
-			<button class="btn btn-outline-success dropdown-toggle" type="button"
-				id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false">Filter by Category</button>
-			<div class="dropdown-menu btn btn-outline-success"
-				aria-labelledby="dropdownMenuButton">
-				<c:forEach items="${cat}" var="c">
-					<a class="dropdown-item" href="mFilterList/${c.id}">${c.name}</a>
-				</c:forEach>
-			</div>
-		</div>
-
-		<h2 class="pt-4 inline">Manage Stock Items</h2>
+		<h2 class="pt-4 inline">Filter List</h2>
 		<br>
 		<div class="cards">
 			<c:forEach items="${stock}" var="st" varStatus="row">
@@ -85,9 +72,11 @@
 									<td>${st.category.name }</td>
 								</tr>
 								<tr>
-									<td><a href="/SpringHibernateStock/upStockForm/${st.stock_id }"
+									<td><a
+										href="/SpringHibernateStock/upStockForm/${st.stock_id }"
 										class="btn btn-warning btn-block">Update</a></td>
-									<td><a href="/SpringHibernateStock/deleteStock/${st.stock_id }"
+									<td><a
+										href="/SpringHibernateStock/deleteStock/${st.stock_id }"
 										class="btn btn-danger btn-block">Delete</a></td>
 								</tr>
 							</tbody>
@@ -97,9 +86,5 @@
 			</c:forEach>
 		</div>
 	</div>
-	<div class="container-fluid pt-4">
-		<jsp:include page="footer.jsp"></jsp:include>
-	</div>
-
 </body>
 </html>

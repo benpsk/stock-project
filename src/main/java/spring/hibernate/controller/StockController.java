@@ -65,6 +65,12 @@ public class StockController {
 		m.addAttribute("stock", stockServices.filterCat(id));
 		return "filterPage";
 	}
+	
+	@RequestMapping(value="/mFilterList/{id}")
+	public String mFilterList(@PathVariable int id, Model m) {
+		m.addAttribute("stock", stockServices.filterCat(id));
+		return "mFilterList";
+	}
 
 	@RequestMapping(value = "/getSale/{id}")
 	public String getSale(@PathVariable int id, Model m) {
