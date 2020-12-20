@@ -1,5 +1,6 @@
 package spring.hibernate.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -24,24 +25,32 @@ public class StockDao {
 		return sessionFactory.getCurrentSession();
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void deleteStock(int id) {
-		String hql = "DELETE FROM Stock WHERE stock_id=:id";
-		Query q = getSession().createQuery(hql);
-		q.setParameter("id", id);
-		q.executeUpdate();
+		Serializable ide = new Integer(id);
+		Object obj = getSession().load(Stock.class, ide);
+		if (obj != null) {
+		    getSession().delete(obj);
+		}
+		
+//		String hql = "DELETE FROM Stock WHERE stock_id=:id";
+//		Query q = getSession().createQuery(hql);
+//		q.setParameter("id", id);
+//		q.executeUpdate();
 	}
 	
 	public void updateStock(Stock stock) {
-		String hql = "UPDATE Stock SET name=:name, code=:code, sale_price=:s_price, qty=:qty, purchase_price=:p_price, category_id=:catId WHERE stock_id=:id";
-		Query q = getSession().createQuery(hql);
-		q.setParameter("name", stock.getName());
-		q.setParameter("code", stock.getCode());
-		q.setParameter("s_price", stock.getSale_price());
-		q.setParameter("qty", stock.getQty());
-		q.setParameter("p_price", stock.getPurchase_price());
-		q.setParameter("catId", stock.getCategory().getId());
-		q.setParameter("id", stock.getStock_id());
-		q.executeUpdate();
+//		String hql = "UPDATE Stock SET name=:name, code=:code, sale_price=:s_price, qty=:qty, purchase_price=:p_price, category_id=:catId WHERE stock_id=:id";
+//		Query q = getSession().createQuery(hql);
+//		q.setParameter("name", stock.getName());
+//		q.setParameter("code", stock.getCode());
+//		q.setParameter("s_price", stock.getSale_price());
+//		q.setParameter("qty", stock.getQty());
+//		q.setParameter("p_price", stock.getPurchase_price());
+//		q.setParameter("catId", stock.getCategory().getId());
+//		q.setParameter("id", stock.getStock_id());
+//		q.executeUpdate();
+		getSession().update(stock);
 	}
 	
 	public void upStockQty(int id, int qty) {
@@ -60,15 +69,16 @@ public class StockDao {
 	}
 
 	public void updateSale(Sale sale) {
-		String hql = "UPDATE Sale SET date=:date, qty=:qty, price=:price, total_amount=:total_amount, stock_id=:stock_id WHERE sale_id=:id";
-		Query q = getSession().createQuery(hql);
-		q.setParameter("date", sale.getDate());
-		q.setParameter("qty", sale.getQty());
-		q.setParameter("price", sale.getPrice());
-		q.setParameter("total_amount", sale.getTotal_amount());
-		q.setParameter("stock_id", sale.getStock().getStock_id());
-		q.setParameter("id", sale.getSale_id());
-		q.executeUpdate();
+//		String hql = "UPDATE Sale SET date=:date, qty=:qty, price=:price, total_amount=:total_amount, stock_id=:stock_id WHERE sale_id=:id";
+//		Query q = getSession().createQuery(hql);
+//		q.setParameter("date", sale.getDate());
+//		q.setParameter("qty", sale.getQty());
+//		q.setParameter("price", sale.getPrice());
+//		q.setParameter("total_amount", sale.getTotal_amount());
+//		q.setParameter("stock_id", sale.getStock().getStock_id());
+//		q.setParameter("id", sale.getSale_id());
+//		q.executeUpdate();
+		getSession().update(sale);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -84,11 +94,18 @@ public class StockDao {
 		return (Sale) cr.uniqueResult();
 	}
 
+	@SuppressWarnings("deprecation")
 	public void deleteSale(int id) {
-		String hql = "DELETE FROM Sale WHERE sale_id = :id";
-		Query query = getSession().createQuery(hql);
-		query.setParameter("id", id);
-		query.executeUpdate();
+//		String hql = "DELETE FROM Sale WHERE sale_id = :id";
+//		Query query = getSession().createQuery(hql);
+//		query.setParameter("id", id);
+//		query.executeUpdate();
+		
+		Serializable ide = new Integer(id);
+		Object obj = getSession().load(Sale.class, ide);
+		if (obj != null) {
+			getSession().delete(obj);
+		}
 	}
 
 	@SuppressWarnings("unchecked")

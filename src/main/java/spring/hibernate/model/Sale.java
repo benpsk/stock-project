@@ -28,6 +28,14 @@ public class Sale {
 	@JoinColumn(name="stock_id")
 	private Stock stock = new Stock();
 	
+	public Stock getStock() {
+		return stock;
+	}
+
+	public void setStock(Stock stock) {
+		this.stock = stock;
+	}
+
 	public Sale() {
 		
 	}
@@ -70,14 +78,6 @@ public class Sale {
 
 	public void setTotal_amount(Double total_amount) {
 		this.total_amount = total_amount;
-	}
-
-	public Stock getStock() {
-		return stock;
-	}
-
-	public void setStock(Stock stock) {
-		this.stock = stock;
 	}
 	
 	

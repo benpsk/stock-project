@@ -1,11 +1,16 @@
 package spring.hibernate.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -21,13 +26,13 @@ public class Stock {
 	@NotNull
 	@Pattern(regexp = "^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$", message="**Invalid Stock Code!**")
 	private String code;
-	@NotNull
+	@NotNull(message="**Invalid Price (Please Entry number only)!**")
 //	@Pattern(regexp="^[0-9]+$",message="**Invalid Price (Please Entry number only)!**")
 	private Double sale_price;
-	@NotNull
+	@NotNull(message="**Invalid Quantity (Please Entry number only)!**")
 //	@Pattern(regexp="^[0-9]+$",message="**Invalid Quantity (Please Entry number only)!**")
 	private int qty;
-	@NotNull
+	@NotNull(message="**Invalid Price (Please Entry number only)!**")
 //	@Pattern(regexp="^[0-9]+$",message="**Invalid Price (Please Entry number only)!**")
 	private Double purchase_price;
 	
@@ -38,6 +43,17 @@ public class Stock {
 	@ManyToOne
 	@JoinColumn(name="category_id")
 	public Category category = new Category();
+	
+	@OneToMany(mappedBy="stock", targetEntity=Sale.class, cascade=CascadeType.ALL)
+	private List<Sale> sale_item = new ArrayList<Sale>();
+
+	public List<Sale> getSale_item() {
+		return sale_item;
+	}
+
+	public void setSale_item(List<Sale> sale_item) {
+		this.sale_item = sale_item;
+	}
 
 	public int getStock_id() {
 		return stock_id;

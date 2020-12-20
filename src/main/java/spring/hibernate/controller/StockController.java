@@ -138,7 +138,7 @@ public class StockController {
 	public String stock(@Valid @ModelAttribute(value = "stock") Stock stock, BindingResult br) {
 
 		if (br.hasErrors()) {
-			return "redirect:/stockForm";
+			return "stockForm";
 		} else {
 			stockServices.addStock(stock);
 			return "redirect:/index.htm";
